@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-import { PersonContext } from '../contexts/PersonContextProvider';
-import { useInput } from '../hooks/useInput';
+import { usePerson } from '../../hooks/usePerson';
+import { useInput } from '../../hooks/useInput';
 
 function ImcForm({onSubmit}) {
-  const { person } = useContext(PersonContext);
-
+  const [person] = usePerson();
   const [height, heightProps, resetHeight] = useInput(0.00);
   const [weight, weightProps, resetWeight] = useInput(0.00);
 

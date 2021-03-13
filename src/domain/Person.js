@@ -43,4 +43,8 @@ export default class Person {
       imc: this._imc
     };
   }
+
+  copy(data) {
+    return Object.assign(new Person(), this, data);
+  }
 }
