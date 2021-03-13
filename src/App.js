@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useInput } from './hooks/useInput';
 
 import ImcTableView from './views/ImcTableView';
 import ImcView from './views/ImcView';
+import ImcForm from './forms/ImcForm';
 import ImcController from './controllers/ImcController';
 import Person from './domain/Person';
 
@@ -11,12 +13,8 @@ function App() {
 
   const [controller,] = useState(new ImcController());
   const [person, setPerson] = useState(new Person());
-  const [height, setHeight] = useState(0.00);
-  const [weight, setWeight] = useState(0.00);
-
-  const calculateImc = async (evt) => {
-    evt.preventDefault();
-
+  
+  const calculateImc = async (height, weight) => {
     var newPerson = new Person(parseFloat(height), parseFloat(weight));
 
     const personCalculated = await controller.calculate(newPerson.toObject());
@@ -31,17 +29,7 @@ function App() {
             <ImcTableView />
           </div>
           <hr />
-          <form onSubmit={calculateImc}>
-            <div className="row">
-              <label>Altura</label>
-              <input id="altura" placeholder="0.00" value={height} onChange={e => setHeight(e.target.value)} />
-            </div>
-            <div className="row">
-              <label>Peso</label>
-              <input id="peso" placeholder="0.00" value={weight} onChange={e => setWeight(e.target.value)} />
-            </div>
-            <button type="submit" className="action">Calcular</button>
-          </form>
+          <ImcForm onSubmit={calculateImc} person={person} />
         </div>
       </div>
       <hr />
