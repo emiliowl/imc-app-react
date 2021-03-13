@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import { PersonContext } from '../contexts/PersonContextProvider';
+
 function ImcView(props) {
   console.log('oh well... rendering ' + JSON.stringify(props));
   
-  const { person } = props;
+  const { person } = useContext(PersonContext);
 
   return (
     <div className={props.className}>
